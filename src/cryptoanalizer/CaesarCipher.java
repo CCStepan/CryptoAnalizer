@@ -1,5 +1,9 @@
 package cryptoanalizer;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class CaesarCipher {
@@ -11,14 +15,47 @@ public class CaesarCipher {
 
     private static final String ALPHABET = rus + eng + rus.toUpperCase() + eng.toUpperCase() + cypher + z;
 
+    public static final String TXT_FOLDER = System.getProperty("user.dir") + File.separator + "text" + File.separator;
     // Методы для шифрования, расшифровки, brute force, статистического анализа
 
     public void encrypt(String inputFile, String outputFile, int key) {
-        // Реализация шифрования
+        Validator validator = new Validator();
+        ArrayList<Character> alphabet = new ArrayList<Character>();
+        for (int i = 0; i < ALPHABET.length(); i++) {
+
+
+            alphabet.add(ALPHABET.charAt(i));
+        }
+        if (validator.isValidKey(key, alphabet) && validator.isFileExists(inputFile)) {
+            Cipher cipher = new Cipher(alphabet);
+            FileManager fileManager = new FileManager();
+
+
+            String text = cipher.encrypt(fileManager.readFile(TXT_FOLDER + inputFile), key);
+            fileManager.writeFile(text, TXT_FOLDER + outputFile);
+
+        } else {
+            System.out.println("Ключ недействителен или файла не существует");
+        }
     }
 
     public void decrypt(String inputFile, String outputFile, int key) {
-        // Реализация расшифровки
+        Validator validator = new Validator();
+        ArrayList<Character> alphabet = new ArrayList<Character>();
+        for (int i = 0; i < ALPHABET.length(); i++) {
+            alphabet.set(i, ALPHABET.charAt(i));
+        }
+        if (validator.isValidKey(key, alphabet) && validator.isFileExists(inputFile)) {
+            Cipher cipher = new Cipher(alphabet);
+            FileManager fileManager = new FileManager();
+
+
+            String text = cipher.decrypt(fileManager.readFile(TXT_FOLDER + inputFile), key);
+            fileManager.writeFile(text, TXT_FOLDER + outputFile);
+
+        } else {
+            System.out.println("Ключ недействителен или файла не существует");
+        }
     }
 
     public void bruteForce(String inputFile, String outputFile,
@@ -34,7 +71,9 @@ public class CaesarCipher {
     // Вспомогательные методы: validateInput(), createAlphabet(), shiftCharacter(), readFile(), writeFile()
 
     public static void main(String[] args) {
-        CaesarCipher cipher = new CaesarCipher();
+
+
+        CaesarCipher cipherCipher = new CaesarCipher();
         Scanner scanner = new Scanner(System.in);
         System.out.println("""
                 Логика меню
@@ -59,7 +98,7 @@ public class CaesarCipher {
                 int key = scanner.nextInt();
 
 
-                cipher.encrypt(inputNameFile, outputNameFile, key);
+                cipherCipher.encrypt(inputNameFile, outputNameFile, key);
 
 
             } else if (s.equals("2")) {
@@ -71,7 +110,7 @@ public class CaesarCipher {
                 int key = scanner.nextInt();
 
 
-                cipher.decrypt(inputNameFile, outputNameFile, key);
+                cipherCipher.decrypt(inputNameFile, outputNameFile, key);
             } else if (s.equals("3")) {
 
             } else if (s.equals("4")) {
