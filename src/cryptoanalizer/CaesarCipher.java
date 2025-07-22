@@ -11,7 +11,7 @@ public class CaesarCipher {
     static String rus = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
     static String eng = "abcdefghijklmnopqrstuvwxyz";
     static String cypher = "1234567890";
-    static String z = "!@#$%^&*()[]{}";
+    static String z = "!@#$%^&*()[]{} ";
 
     private static final String ALPHABET = rus + eng + rus.toUpperCase() + eng.toUpperCase() + cypher + z;
 
