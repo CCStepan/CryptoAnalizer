@@ -6,7 +6,6 @@ public class Cipher {
     private ArrayList<Character> alphabet;
 
 
-
     public Cipher(ArrayList<Character> alphabet) {
         this.alphabet = alphabet;
     }
@@ -15,8 +14,11 @@ public class Cipher {
         String result = "";
         for (int i = 0; i < text.length(); i++) {
             char symbol = text.charAt(i);
-            result = result + alphabet.get((alphabet.indexOf(symbol) + shift) % alphabet.size());
-
+            if (alphabet.indexOf(symbol) == -1) {
+                result = result + symbol;
+            } else {
+                result = result + alphabet.get((alphabet.indexOf(symbol) + shift) % alphabet.size());
+            }
         }
         return result;
     }
@@ -25,8 +27,11 @@ public class Cipher {
         String result = "";
         for (int i = 0; i < encryptedText.length(); i++) {
             char symbol = encryptedText.charAt(i);
-            result = result + alphabet.get((alphabet.indexOf(symbol) - shift) % alphabet.size());
-
+            if (alphabet.indexOf(symbol) == -1) {
+                result = result + symbol;
+            } else {
+                result = result + alphabet.get((alphabet.indexOf(symbol) - shift) % alphabet.size());
+            }
         }
         return result;
     }

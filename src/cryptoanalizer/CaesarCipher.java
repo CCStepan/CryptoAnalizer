@@ -43,7 +43,7 @@ public class CaesarCipher {
         Validator validator = new Validator();
         ArrayList<Character> alphabet = new ArrayList<Character>();
         for (int i = 0; i < ALPHABET.length(); i++) {
-            alphabet.set(i, ALPHABET.charAt(i));
+            alphabet.add(ALPHABET.charAt(i));
         }
         if (validator.isValidKey(key, alphabet) && validator.isFileExists(inputFile)) {
             Cipher cipher = new Cipher(alphabet);
