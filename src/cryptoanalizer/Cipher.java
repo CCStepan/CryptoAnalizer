@@ -14,7 +14,7 @@ public class Cipher {
         String result = "";
         for (int i = 0; i < text.length(); i++) {
             char symbol = text.charAt(i);
-            if (alphabet.indexOf(symbol) == -1) {
+            if (!alphabet.contains(symbol)) {
                 result = result + symbol;
             } else {
                 result = result + alphabet.get((alphabet.indexOf(symbol) + shift) % alphabet.size());
@@ -27,10 +27,16 @@ public class Cipher {
         String result = "";
         for (int i = 0; i < encryptedText.length(); i++) {
             char symbol = encryptedText.charAt(i);
-            if (alphabet.indexOf(symbol) == -1) {
+            if (!alphabet.contains(symbol)) {
                 result = result + symbol;
             } else {
-                result = result + alphabet.get((alphabet.indexOf(symbol) - shift) % alphabet.size());
+
+                if ((alphabet.indexOf(symbol) - shift) % alphabet.size() < 0) {
+                    result = result + alphabet.get(alphabet.size()+ (alphabet.indexOf(symbol) - shift) % alphabet.size());
+                } else {
+                    result = result + alphabet.get((alphabet.indexOf(symbol) - shift) % alphabet.size());
+
+                }
             }
         }
         return result;

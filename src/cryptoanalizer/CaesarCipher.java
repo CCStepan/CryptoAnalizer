@@ -26,7 +26,7 @@ public class CaesarCipher {
 
             alphabet.add(ALPHABET.charAt(i));
         }
-        if (validator.isValidKey(key, alphabet) && validator.isFileExists(inputFile)) {
+        if (validator.isValidKey(key, alphabet) && validator.isFileExists(TXT_FOLDER+inputFile)) {
             Cipher cipher = new Cipher(alphabet);
             FileManager fileManager = new FileManager();
 
@@ -45,7 +45,8 @@ public class CaesarCipher {
         for (int i = 0; i < ALPHABET.length(); i++) {
             alphabet.add(ALPHABET.charAt(i));
         }
-        if (validator.isValidKey(key, alphabet) && validator.isFileExists(inputFile)) {
+
+        if (validator.isValidKey(key, alphabet) && validator.isFileExists(TXT_FOLDER+inputFile)) {
             Cipher cipher = new Cipher(alphabet);
             FileManager fileManager = new FileManager();
 

@@ -21,7 +21,6 @@ public class Validator {
 
     public boolean isFileExists(String filePath) {
 
-
         return Files.exists(Path.of(filePath));
     }
 }
