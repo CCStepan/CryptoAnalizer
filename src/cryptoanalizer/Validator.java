@@ -16,6 +16,9 @@ public class Validator {
         if (key < 0) {
             return false;
         }
+        if(key>n){
+            return false;
+        }
         return true;
     }
 
